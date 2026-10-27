@@ -1,17 +1,17 @@
-# egocollab-vlm-eval
+
 
 **An exploratory evaluation of small open vision–language models (VLMs) on egocentric procedural video: can they notice mistakes, and does a task description help?**
 
-Author: Muhammad Zain (M2 Artificial Intelligence for One Health, Université Grenoble Alpes)
+Author: Muhammad Zain 
 
 > **Status: exploratory study.** 22 time windows from a single video, two small models, one wording per prompt type. The results describe how these models behaved in this setup. They do not measure how well VLMs detect mistakes in general.
 
 ## Key findings
 
-1. **Neither model flagged a mistake.** LLaVA-OneVision 0.5B and Qwen2.5-VL 3B answered `RIGHT` for all 22 windows in every condition (0 of 11 labeled mistakes caught).
+1. **Neither model flagged a mistake.** LLaVA-OneVision 0.5B and Qwen2.5-VL 3B answered `RIGHT` for all 22 windows in every run where a verdict was generated (0 of 11 labeled mistakes caught).
 2. **An apparent signal was an artifact.** On the first test set, the 0.5B model's `WRONG`-vs-`RIGHT` score separated mistakes from correct actions with AUC ≈ 0.67–0.71. A baseline that uses only the window's *start time* reached 0.67 as well. After matching correct windows to mistake windows by position and duration, the model's AUC fell to 0.47 (chance level).
-3. **Adding the task description did not help.** It changed the wording of free-form answers and made the 0.5B model slightly *more* confident in `RIGHT` (scores about 0.8 lower in the original set), but it did not make any model flag a mistake.
-4. **Free-form guidance was generic and often off-topic** (invented objects, an unsupported brand name, advice that fits any camera video). See [Guidance check](#guidance-check-qualitative).
+3. **Adding the task description did not help.** It changed the wording of free-form answers and made the 0.5B model *more* confident in `RIGHT` (its `WRONG`-minus-`RIGHT` scores were about 0.8 lower on the original set; not analyzed for the 3B model), but it did not make any model flag a mistake.
+4. **In the 6 windows examined, free-form guidance was generic and often contained details unrelated to the task** (invented objects, an unverified brand name, advice that fits any camera video). This is an informal reading, not a measurement. See [Guidance check](#guidance-check-qualitative).
 
 ## Motivation
 
@@ -94,7 +94,7 @@ An earlier free-form version ("Is the person making a mistake? Answer yes or no 
 | Qwen2.5-VL 3B | matched | right or wrong | A | 0 / 22 | 0 / 11 |
 | Qwen2.5-VL 3B | matched | right or wrong | B | 0 / 22 | 0 / 11 |
 
-Reversing the option order did not change the behavior, so the result is not a simple "first option" preference.
+Reversing the option order did not change the behavior of the 0.5B model (the only model tested this way), so its result is not a simple "first option" preference.
 
 ### Score-based ranking (AUC)
 
@@ -106,13 +106,15 @@ Reversing the option order did not change the behavior, so the result is not a s
 | Qwen2.5-VL 3B | matched | A | 0.57 | 0.51 | 0.55 |
 | Qwen2.5-VL 3B | matched | B | 0.52 | 0.51 | 0.55 |
 
+Baseline values are direction-adjusted (an AUC of 0.49 is reported as 0.51), so the Qwen rows differ slightly from the raw values printed in the notebook.
+
 On the original set, the 0.5B model's ranking tracked where a window sits in the video (every window starting before ≈ 200 s scored higher than every later one, by a tiny margin). That is why the original-set AUC should not be read as mistake detection. On the matched set, where position and duration no longer differ between groups, no model is distinguishable from chance.
 
 ### Guidance check (qualitative)
 
 For 6 windows (3 mistake, 3 correct; seed 0) from the matched set, Qwen2.5-VL 3B answered the open guidance question under conditions A and B (12 answers, in `results/guidance_qwen3b.csv`). **These answers have not been rated by humans**; the observations below come from reading the text against the annotated action names and are not a measurement.
 
-- Descriptions sometimes contain objects unrelated to a camera setup (a box, a printer cartridge, a card, "moving around the room"), and one answer names a brand ("Canon lens") that is probably not readable at this resolution.
+- Descriptions sometimes contain objects unrelated to a camera setup (a box, a printer cartridge, a card, "moving around the room"), and one answer names a brand ("Canon lens") that I could not verify in the frames.
 - Condition B pulls descriptions toward "setting up a camera", which fits the task but is generic.
 - None of the 12 answers mentions the annotated mistake (dropping the lens, pulling the battery, withdrawing the lens cover). Three answers raise an issue: one on a mistake window (for an unrelated reason) and two on correct windows.
 - The advice ("hold the camera steady", "adjust the position") would fit almost any camera video and does not resemble the instructor's actual corrections.
@@ -120,10 +122,11 @@ For 6 windows (3 mistake, 3 correct; seed 0) from the matched set, Qwen2.5-VL 3B
 ## Limitations
 
 - **One video, 22 windows.** Small samples make AUC very noisy, and the results may not transfer to other videos, tasks or people.
-- **Low resolution.** The compressed videos are 454 × 256 px. Differences such as "lens" vs "lens cover" may not be visible even to a human; the annotators worked with the full recordings and audio.
-- **Four frames per window**, sampled sparsely (≈ 0.5–1 s apart). Fast motions can fall between frames. The frame count was not varied, and video-native input (which Qwen2.5-VL supports) was not tested.
+- **Low resolution.** The compressed videos are 454 × 256 px. Differences such as "lens" vs "lens cover" may not be visible even to a human; the annotators probably had higher-resolution video and audio, which I did not check.
+- **Four frames per window**, sampled sparsely (≈ 0.5–1 s apart for typical windows, and much farther apart for a few long windows in the original set). Fast motions can fall between frames. The frame count was not varied, and video-native input (which Qwen2.5-VL supports) was not tested.
 - **Two small models**, differing in size and family. Larger models and fine-tuned models were not tested.
 - **One wording per prompt type.** Other prompts might behave differently.
+- **Score definition.** The score compares the model's first-token scores for `WRONG` (first piece `WR`) and `RIGHT`. Full-sequence probabilities and alternative spellings were not computed, so the AUC values are exploratory and should not be read as validated performance.
 - **Mistake labels are human judgments** and can be subjective; ambiguous `otherwise` labels were excluded.
 - **Matching is heuristic** (greedy, with a hand-chosen weight). Other confounds could remain.
 - **Balanced test sets** (50 % mistakes) do not reflect the real ≈ 5 % mistake rate.
@@ -143,10 +146,10 @@ results/
   results_qwen3b_matched.csv   Qwen2.5-VL 3B, verdicts and scores, matched set
   guidance_qwen3b.csv          open-ended guidance answers (rating columns left empty)
   summary_words.csv            summary of the one-word experiments
-  summary_auc.csv              summary of AUC and baselines
+  summary_auc.csv              summary of AUC and baselines (LLaVA 0.5B only)
 ```
 
-**About the notebook:** it was run interactively in Google Colab, including session restarts, so the cells are an *exploration log* in the order the experiments were done, not a clean top-to-bottom pipeline. The results files above are the saved outputs of those runs.
+**About the notebook:** it was run interactively in Google Colab, including session restarts, so it is an *exploration log* with section headers, in the order the experiments were done, not a clean top-to-bottom pipeline. The setup and model-loading cells repeat because the runtime was restarted, and two early designs (a free-form mistake question and a three-video test set) are marked as superseded. The Qwen2.5-VL AUCs are not in `summary_auc.csv`; they can be recomputed from the `score` column of `results_qwen3b_matched.csv`. The results files above are the saved outputs of those runs.
 
 ## Reproducing
 

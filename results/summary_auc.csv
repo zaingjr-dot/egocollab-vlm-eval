@@ -1,0 +1,4 @@
+test set,condition,model AUC,start-time baseline,duration baseline
+original,A,0.67,0.67,0.57
+original,B,0.71,0.67,0.57
+matched,A,0.47,0.51,0.55

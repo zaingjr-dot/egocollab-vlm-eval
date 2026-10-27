@@ -1,0 +1,23 @@
+video,task,start,end,action,truth,duration,score
+R014-7July-DSLR,setup camera,12.914,16.214,rotate lens_cover,wrong,3.299999999999999,-2.84375
+R014-7July-DSLR,setup camera,17.2,19.212,rotate lens_cover,wrong,2.0120000000000005,-2.796875
+R014-7July-DSLR,setup camera,19.307,21.9,withdraw lens_cover,wrong,2.593,-2.765625
+R014-7July-DSLR,setup camera,50.45,53.956,rotate lens,wrong,3.5060000000000002,-2.78125
+R014-7July-DSLR,setup camera,91.1,93.336,drop lens,wrong,2.236000000000004,-2.84375
+R014-7July-DSLR,setup camera,168.247,171.252,press button,wrong,3.0049999999999955,-2.828125
+R014-7July-DSLR,setup camera,206.916,213.957,open battery_door,wrong,7.040999999999997,-3.0
+R014-7July-DSLR,setup camera,214.2,219.4,open battery_door,wrong,5.200000000000017,-3.015625
+R014-7July-DSLR,setup camera,225.592,227.647,rotate dslr,wrong,2.0549999999999784,-3.09375
+R014-7July-DSLR,setup camera,228.2,230.8,pull battery,wrong,2.6000000000000227,-2.96875
+R014-7July-DSLR,setup camera,279.295,281.961,touch dslr,wrong,2.665999999999997,-3.125
+R014-7July-DSLR,setup camera,6.1,8.0,grab dslr,right,1.9000000000000004,-2.9375
+R014-7July-DSLR,setup camera,8.039,9.667,lift dslr,right,1.6280000000000001,-3.015625
+R014-7July-DSLR,setup camera,43.659,45.8,touch release_button,right,2.1409999999999982,-2.671875
+R014-7July-DSLR,setup camera,55.668,59.3,place lens,right,3.631999999999998,-2.59375
+R014-7July-DSLR,setup camera,93.473,95.5,grab lens,right,2.027000000000001,-2.3125
+R014-7July-DSLR,setup camera,171.371,174.396,inspect dslr,right,3.0249999999999773,-2.9375
+R014-7July-DSLR,setup camera,201.561,204.976,rotate dslr,right,3.414999999999992,-3.0
+R014-7July-DSLR,setup camera,233.2,238.7,push battery,right,5.5,-2.90625
+R014-7July-DSLR,setup camera,220.1,222.166,press battery_lock,right,2.0660000000000025,-3.03125
+R014-7July-DSLR,setup camera,243.282,246.435,hold battery,right,3.1529999999999916,-2.984375
+R014-7July-DSLR,setup camera,257.23,261.443,close battery_door,right,4.212999999999965,-2.984375

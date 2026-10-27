@@ -1,0 +1,23 @@
+video,task,start,end,action,why_wrong,truth
+R014-7July-DSLR,setup camera,91.1,93.336,drop lens,The student drops the lens by accident.,wrong
+R014-7July-DSLR,setup camera,228.2,230.8,pull battery,The student should first push battery.,wrong
+R014-7July-DSLR,setup camera,19.307,21.9,withdraw lens_cover,The student detaches the lens cover instead the lens.,wrong
+R014-7July-DSLR,setup camera,279.295,281.961,touch dslr,The student presses the wrong place.,wrong
+R014-7July-DSLR,setup camera,206.916,213.957,open battery_door,The student tries to lift the wrong side of the lid.,wrong
+R014-7July-DSLR,setup camera,17.2,19.212,rotate lens_cover,The student twists the lens cover instead the lens.,wrong
+R014-7July-DSLR,setup camera,214.2,219.4,open battery_door,The student tries to lift the button.,wrong
+R014-7July-DSLR,setup camera,225.592,227.647,rotate dslr,The student should first push battery.,wrong
+R014-7July-DSLR,setup camera,50.45,53.956,rotate lens,The student should rotate the entire body.,wrong
+R014-7July-DSLR,setup camera,12.914,16.214,rotate lens_cover,The student twists the lens cover instead of the lens.,wrong
+R014-7July-DSLR,setup camera,168.247,171.252,press button,student pressed the wrong button.,wrong
+R014-7July-DSLR,setup camera,233.2,238.7,push battery,none,right
+R014-7July-DSLR,setup camera,282.07,289.315,inspect dslr,none,right
+R014-7July-DSLR,setup camera,201.561,204.976,rotate dslr,none,right
+R014-7July-DSLR,setup camera,45.906,49.116,press release_button,none,right
+R014-7July-DSLR,setup camera,107.1,108.8,rotate lens,none,right
+R014-7July-DSLR,setup camera,186.346,187.9,press button,none,right
+R014-7July-DSLR,setup camera,205.1,206.7,open battery_door,none,right
+R014-7July-DSLR,setup camera,109.1,117.4,rotate lens,none,right
+R014-7July-DSLR,setup camera,289.383,313.8,rotate dslr,none,right
+R014-7July-DSLR,setup camera,239.2,243.22,withdraw battery,none,right
+R014-7July-DSLR,setup camera,220.1,222.166,press battery_lock,none,right
